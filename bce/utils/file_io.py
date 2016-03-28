@@ -5,6 +5,8 @@
 #  found in the license.txt file.
 #
 
+import bce.utils.compatible as _utils_compatible
+
 
 def read_text_file(file_path, encoding="utf-8"):
     """Read a text file.
@@ -20,8 +22,12 @@ def read_text_file(file_path, encoding="utf-8"):
     #  Initialize the handler.
     handler = None
 
+    # noinspection PyBroadException
     try:
-        handler = open(file_path, "r", encoding=encoding)
+        if _utils_compatible.is_old_python():
+            handler = open(file_path, "r")
+        else:
+            handler = open(file_path, "r", encoding=encoding)
         content = handler.read()
         handler.close()
     except Exception:

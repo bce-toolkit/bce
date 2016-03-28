@@ -284,6 +284,15 @@ def main():
             #  Get the abbreviation expression.
             arv_expression = extra_abbreviations[arv_name]
 
+            #  Convert unicode to string in Python 2.
+            if _utils_compatible.is_old_python():
+                # noinspection PyUnresolvedReferences
+                if isinstance(arv_name, unicode):
+                    arv_name = str(arv_name)
+                # noinspection PyUnresolvedReferences
+                if isinstance(arv_expression, unicode):
+                    arv_expression = str(arv_expression)
+
             #  Check.
             if not (isinstance(arv_expression, str) and
                     _utils_input_chk.check_input_expression_characters(arv_expression)):

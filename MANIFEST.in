@@ -1,0 +1,9 @@
+
+include bce/test/*.in
+include bce/test/*.out
+
+recursive-include docs *
+
+include AUTHORS.md
+include LICENSE.md
+include README.md
