@@ -52,7 +52,7 @@ If you are using Linux/UNIX, please run these commands in root privilege. Typica
 Usage
 -------------
 
-### Console
+### Start the console
 
 After installation, you can run BCE in your terminal by typing following command:
 
@@ -60,7 +60,30 @@ After installation, you can run BCE in your terminal by typing following command
 bce-console
 ```
 
-It has following arguments:
+Now you will see a prompt (the version numbers may be different):
+
+```
+BCE V4.7.9614
+Copyright (C) 2014 - 2015 The BCE Authors. All rights reserved.
+>> 
+```
+
+Now you can type chemical equation that you want to balance after the "&gt;&gt;" prompt. Type "Enter" key and then the program will give you the result or error messages. For example:
+
+```
+>> Fe2(SO4)3+Cu=Fe+CuSO4
+Fe2(SO4)3+3Cu=2Fe+3CuSO4
+>> Cu-<e->=Cu<2e+>
+Cu-2<e->=Cu<2e+>
+```
+
+For more syntax information, please refers to the "Syntax (and examples)" chapter.
+
+To exit this program, just type (press) "Ctrl+C" on your keyboard. Or if you are using Microsoft Windows operating system, you can simply close the window.
+
+### Command line
+
+"bce-console" has following arguments:
 
 | Argument                        | Description                           |
 |---------------------------------|---------------------------------------|
@@ -303,3 +326,4 @@ Dependencies
 | Name  | Version    | Official Website                                 |
 |-------|------------|--------------------------------------------------|
 | SymPy | &gt;=0.7.3 | [https://www.sympy.org/](https://www.sympy.org/) |
+
