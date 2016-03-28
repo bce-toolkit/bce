@@ -338,3 +338,10 @@ Description:
     Can't balance chemical equations (with auto-correction form) that have multiple answers.
 ```
 
+Service
+-------------
+
+It is our proud to provide service to you and improve our product. If you have questions about this program, please [send a mail](mailto://bcepy.service@gmail.com) to us.
+
+All services are free of charge.
+
