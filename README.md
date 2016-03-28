@@ -100,7 +100,6 @@ Now you can use your customized abbreviations now. For example:
 ```
 >> [PhOH]+O2=CO2+H2O
 [PhOH]+7O2=6CO2+3H2O
-
 ```
 
 ### Custom Unknown Header
