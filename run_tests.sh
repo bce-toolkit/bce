@@ -5,7 +5,7 @@
 #  found in the license.txt file.
 #
 
-for test_module in `cat "test/modules.lst"`; do
+for test_module in `cat "bce/test/modules.lst"`; do
     python -B -m unittest --verbose "$test_module"
     if [ "$?" != "0" ]; then
         exit 1
