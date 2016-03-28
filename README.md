@@ -9,18 +9,34 @@ Features
 -------------
 
  - Balance chemical equations (includes ionic equations, equations with multi-solutions, equations with SRU, equations with hydrates, electronic transferring equations, equations with abbreviations and indefinite equations).
- - Auto-correction (wrong side, useless substance or wrong balanced coefficient).
- - Predefined abbreviations and user custom abbreviations.
+ - Auto-correction (includes wrong side correction, useless substance detection and wrong balanced coefficient correction).
+ - Common abbreviations (customizable).
  - Substitute unknown symbols in chemical equations.
- - Humanity error output.
+ - Humanity error message.
  - High precision calculation.
  - Cross platform.
  - Multi languages support.
  - A set of APIs that can help you integrate this library to your own application.
  - Show output in both text and MathML format.
 
+Dependencies
+-------------
+
+| Name   | Version    | Official Website                                   |
+|--------|------------|----------------------------------------------------|
+| Python | &gt;=2.7   | [https://www.python.org/](https://www.python.org/) |
+| SymPy  | &gt;=0.7.3 | [https://www.sympy.org/](https://www.sympy.org/)   |
+
 Installation
 -------------
+
+### Acknowledgement
+
+Before installation, we assume that you have an operating system that supports Python and have installed Python.
+
+Typically, a modern Linux/UNIX distribution has already bundled Python. But you have to check its version.
+
+If you are using Microsoft Windows, you have to download Python from its [official website](https://www.python.org/downloads/windows/) and install it manually.
 
 ### From PyPI
 
@@ -39,6 +55,8 @@ pip3 install bce
 If you are using Linux/UNIX, please run these commands in root privilege. Typically, you can use command **su** or **sudo**.
 
 ### From source
+
+Before installing from the source code, please make sure that you have installed all dependencies listed in the "Dependencies" chapter.
 
 Type following commands in your terminal to install BCE:
 
@@ -319,11 +337,4 @@ Description:
 
     Can't balance chemical equations (with auto-correction form) that have multiple answers.
 ```
-
-Dependencies
--------------
-
-| Name  | Version    | Official Website                                 |
-|-------|------------|--------------------------------------------------|
-| SymPy | &gt;=0.7.3 | [https://www.sympy.org/](https://www.sympy.org/) |
 
