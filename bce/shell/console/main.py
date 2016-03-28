@@ -54,7 +54,7 @@ def exit_signal_handler(signal, frame):
 
     print("")
 
-    exit(0)
+    _sys.exit(0)
 
 
 def main():
@@ -204,7 +204,7 @@ def main():
                 "$3": str(ver_revision)
             }
         ))
-        exit(0)
+        _sys.exit(0)
 
     #  Show the banner.
     if args.show_banner and _sys.stdin.isatty():
@@ -231,7 +231,7 @@ def main():
             l10n_option.get_language_id(),
             "shell.console.error.invalid_unknown_header.description"
         ))
-        exit(1)
+        _sys.exit(1)
 
     #  Initialize abbreviations.
     abbreviations = {}
@@ -253,7 +253,7 @@ def main():
                     "$1": extra_arv_file_path
                 }
             ))
-            exit(1)
+            _sys.exit(1)
 
         #  Parse the file.
         extra_abbreviations = {}
@@ -267,7 +267,7 @@ def main():
                     "$1": extra_arv_file_path
                 }
             ))
-            exit(1)
+            _sys.exit(1)
 
         #  Check.
         if not isinstance(extra_abbreviations, dict):
@@ -278,7 +278,7 @@ def main():
                     "$1": extra_arv_file_path
                 }
             ))
-            exit(1)
+            _sys.exit(1)
 
         for arv_name in extra_abbreviations:
             #  Get the abbreviation expression.
@@ -303,7 +303,7 @@ def main():
                         "$1": extra_arv_file_path
                     }
                 ))
-                exit(1)
+                _sys.exit(1)
 
             #  Save the abbreviation.
             abbreviations[arv_name] = arv_expression
@@ -347,4 +347,4 @@ def main():
     #  Print an empty line.
     print("")
 
-    exit(0)
+    _sys.exit(0)
