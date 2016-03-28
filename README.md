@@ -22,6 +22,24 @@ Features
 Installation
 -------------
 
+### From PyPI
+
+Typically, you can use "pip" command to install the lastest release. Open the terminal and type following command:
+
+```
+pip install bce
+```
+
+Or if you use Python 3, type following command instead:
+
+```
+pip3 install bce
+```
+
+If you are using Linux/UNIX, please run these commands in root privilege. Typically, you can use command **su** or **sudo**.
+
+### From source
+
 Type following commands in your terminal to install BCE:
 
 ```
