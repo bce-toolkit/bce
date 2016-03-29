@@ -247,12 +247,12 @@ The output of the second print() is:
 </mrow>
 ```
 
-You can use [MathJax](https://www.mathjax.org/) or something else to render the MathML. Please pay attention, you have to use the &lt;mathml&gt; and the &lt;/mathml&gt; labels to wrap the output. Like following:
+You can use [MathJax](https://www.mathjax.org/) or something else to render the MathML. Please pay attention, you have to use the &lt;math&gt; and the &lt;/math&gt; labels to wrap the output. Like following:
 
 ```
-<mathml>
+<math>
    (Paste the output here.)
-</mathml>
+</math>
 ```
 
 The output of the third print() is:
