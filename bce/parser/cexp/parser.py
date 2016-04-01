@@ -222,7 +222,7 @@ def parse(expression, token_list, options, mexp_protected_header_enabled=False, 
                 )
 
                 #  Separate the coefficient from the AST.
-                ml_coeff = ml_ast_root.get_prefix_number()
+                ml_coefficient = ml_ast_root.get_prefix_number()
                 ml_ast_root.set_prefix_number(_math_cst.ONE)
 
                 #  Parse the AST.
@@ -236,9 +236,9 @@ def parse(expression, token_list, options, mexp_protected_header_enabled=False, 
 
                 #  Add the molecule to the chemical equation.
                 if side:
-                    ret.append_right_item(operator, ml_coeff, ml_ast_root, ml_atoms_dict)
+                    ret.append_right_item(operator, ml_coefficient, ml_ast_root, ml_atoms_dict)
                 else:
-                    ret.append_left_item(operator, ml_coeff, ml_ast_root, ml_atoms_dict)
+                    ret.append_left_item(operator, ml_coefficient, ml_ast_root, ml_atoms_dict)
             except _cm_error.Error as err:
                 #  Add error description.
                 err.push_traceback(

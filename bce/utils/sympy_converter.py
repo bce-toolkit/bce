@@ -29,6 +29,8 @@ def convert_float_string_to_rational(symbol):
 
     #  Find the position of decimal dot.
     dot_pos = symbol.find(".")
+    if dot_pos < 0:
+        raise ValueError("Missing decimal dot.")
 
     #  Get the value of its numerator and denominator.
     numerator = int(symbol[:dot_pos] + symbol[dot_pos + 1:])
