@@ -7,7 +7,7 @@
 
 _MAJOR = 4
 _MINOR = 7
-_REVISION = 9633
+_REVISION = 9642
 
 
 def get_version():
