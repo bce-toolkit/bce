@@ -73,7 +73,7 @@ class _MathMLPrinter(_sympy_printer.Printer):
         if _coeff_isneg(expr):
             x = _mathml.RowComponent()
             x.append_object(_mathml.OperatorComponent(_mathml.OPERATOR_MINUS))
-            x.append_object(self._print_Mul(-expr))
+            x.append_object(self._print(-expr))
             return x
 
         PREC = _sympy_precedence.precedence(expr)
