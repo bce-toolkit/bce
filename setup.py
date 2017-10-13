@@ -104,7 +104,7 @@ _setuptools.setup(
     long_description="A program that can balance chemical equations and help you deal with complex chemical equations.",
     license="BSD",
     keywords=["bce", "chemistry", "chemical", "equation"],
-    url="https://github.com/TaikiAkita/BCE",
+    url="https://github.com/bce-toolkit/bce",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: BSD License",
