@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-#  Copyright 2014 - 2016 The BCE Authors. All rights reserved.
+#  Copyright 2014 - 2017 The BCE Authors. All rights reserved.
 #  Use of this source code is governed by a BSD-style license that can be
 #  found in the license.txt file.
 #
@@ -101,7 +101,7 @@ _setuptools.setup(
     author="The BCE Authors",
     author_email="xiaojsoft@gmail.com",
     description="A chemical equation balancer.",
-    long_description="A program that can balance chemical equations and help you deal with complex chemical equations.",
+    long_description="A utility/library that can balance chemical equations.",
     license="BSD",
     keywords=["bce", "chemistry", "chemical", "equation"],
     url="https://github.com/bce-toolkit/bce",
