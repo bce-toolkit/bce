@@ -99,7 +99,7 @@ _setuptools.setup(
     #  Base information.
     name="bce",
     author="The BCE Authors",
-    author_email="xiaojsoft@gmail.com",
+    author_email="taiki_akita@163.com",
     description="A chemical equation balancer.",
     long_description="A utility/library that can balance chemical equations.",
     license="BSD",
