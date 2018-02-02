@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  Copyright 2014 - 2017 The BCE Authors. All rights reserved.
+#  Copyright 2014 - 2018 The BCE Authors. All rights reserved.
 #  Use of this source code is governed by a BSD-style license that can be
 #  found in the license.txt file.
 #
@@ -47,7 +47,7 @@ def setup_localization():
                 },
                 "application": {
                     "banner": "BCE V$1.$2.$3",
-                    "copyright": "Copyright (C) 2014 - 2017 The BCE Authors. All rights reserved.",
+                    "copyright": "Copyright (C) 2014 - 2018 The BCE Authors. All rights reserved.",
                     "version": "bce-$1.$2.$3"
                 }
             }
@@ -88,7 +88,7 @@ def setup_localization():
                 },
                 "application": {
                     "banner": "BCE V$1.$2.$3",
-                    "copyright": "版权所有 (C) 2014 - 2017 BCE 的作者，保留所有权利。",
+                    "copyright": "版权所有 (C) 2014 - 2018 BCE 的作者，保留所有权利。",
                     "version": "bce-$1.$2.$3"
                 }
             }
