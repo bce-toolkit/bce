@@ -346,8 +346,11 @@ def main():
         #  Balance chemical equation / expression and print it out.
         try:
             printer_id = _public_printer.PRINTER_TEXT
-            if args.output_mathml:
-                printer_id = _public_printer.PRINTER_MATHML
+            if args.service_mode:
+                printer_id |= _public_printer.PRINTER_MATHML
+            else:
+                if args.output_mathml:
+                    printer_id = _public_printer.PRINTER_MATHML
             cb_ctx = {
                 "symbols": set()
             }
@@ -366,6 +369,7 @@ def main():
                     "symbols": list(cb_ctx["symbols"])
                 }))
             else:
+                assert isinstance(result, str)
                 print(result)
         except _public_exception.ParserErrorWrapper as err:
             if args.service_mode:

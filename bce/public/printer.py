@@ -6,5 +6,10 @@
 #
 
 #  Printer IDs.
-PRINTER_TEXT = 1
-PRINTER_MATHML = 2
+PRINTER_TEXT = (1 << 0)
+PRINTER_MATHML = (1 << 1)
+PRINTER_ALL = (PRINTER_TEXT | PRINTER_MATHML)
+
+#  Printer keys.
+PRINTER_KEY_TEXT = "text"
+PRINTER_KEY_MATHML = "mathml"

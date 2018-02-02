@@ -39,19 +39,29 @@ def _print_cexp(
     :param mexp_parser: The MEXP parser.
     :param printer: The printer ID.
     :param unknown_header: The header of unknowns.
-    :rtype : str
-    :return: The printed string.
+    :rtype : str | dict[str, str]
+    :return: The printed string (or bundle).
     """
 
-    if printer == _pub_printer.PRINTER_TEXT:
-        return cexp_parser.print_out(
+    #  Create output bundle.
+    everything = {}
+
+    #  Print text.
+    if (printer & _pub_printer.PRINTER_TEXT) != 0:
+        output = cexp_parser.print_out(
             cexp_object,
             molecule_parser,
             mexp_parser,
             printer_type=_interface_printer.PRINTER_TYPE_TEXT
         )
-    elif printer == _pub_printer.PRINTER_MATHML:
-        return cexp_parser.print_out(
+        if printer == _pub_printer.PRINTER_TEXT:
+            return output
+        else:
+            everything[_pub_printer.PRINTER_KEY_TEXT] = output
+
+    #  Print MathML.
+    if (printer & _pub_printer.PRINTER_MATHML) != 0:
+        output = cexp_parser.print_out(
             cexp_object,
             molecule_parser,
             mexp_parser,
@@ -59,8 +69,12 @@ def _print_cexp(
             mexp_protected_header_prefix=unknown_header,
             printer_type=_interface_printer.PRINTER_TYPE_MATHML
         ).to_string(indent=0)
-    else:
-        raise RuntimeError("BUG: Unhandled printer type.")
+        if printer == _pub_printer.PRINTER_MATHML:
+            return output
+        else:
+            everything[_pub_printer.PRINTER_KEY_MATHML] = output
+
+    return everything
 
 
 def balance_chemical_equation(
@@ -87,7 +101,7 @@ def balance_chemical_equation(
     :param callback_before_balance: Callback that will be called before balancing.
     :param callback_after_balance: Callback that will be called after balancing.
     :param callback_context: The callback context.
-    :rtype: str
+    :rtype: str | dict[str, str]
     :return: The balanced chemical equation.
     """
 
@@ -196,7 +210,7 @@ def substitute_chemical_equation(
     :param options: The options.
     :param printer: The printer ID.
     :param unknown_header: The header of unknowns.
-    :rtype : str
+    :rtype : str | dict[str, str]
     :return: The substituted chemical equation.
     """
 
