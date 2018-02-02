@@ -104,7 +104,7 @@ _setuptools.setup(
     long_description="A utility/library that can balance chemical equations.",
     license="BSD",
     keywords=["bce", "chemistry", "chemical", "equation"],
-    url="https://github.com/bce-toolkit/bce",
+    url="https://bce.xiaojsoft.org/",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: BSD License",
