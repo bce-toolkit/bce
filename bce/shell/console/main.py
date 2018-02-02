@@ -13,6 +13,7 @@ import bce.public.exception as _public_exception
 import bce.public.option as _public_option
 import bce.public.printer as _public_printer
 import bce.shell.console.l10n as _shell_l10n
+import bce.shell.console.service as _shell_service
 import bce.utils.compatible as _utils_compatible
 import bce.utils.file_io as _utils_file_io
 import bce.utils.input_checker as _utils_input_chk
@@ -181,6 +182,17 @@ def main():
             "shell.console.command.show_version"
         )
     )
+    arg_parser.add_argument(
+        "--service-mode",
+        dest="service_mode",
+        action="store_const",
+        const=True,
+        default=False,
+        help=_l10n_registry.get_message(
+            l10n_option.get_language_id(),
+            "shell.console.command.service_mode"
+        )
+    )
     args = arg_parser.parse_args()
 
     #  Set the language.
@@ -311,15 +323,24 @@ def main():
     #  Set abbreviations in the option object.
     _public_option.MoleculeParserOptionWrapper(option).set_abbreviation_mapping(abbreviations)
 
+    #  Show the hello message (for only service mode).
+    if args.service_mode:
+        _shell_service.send_message("Hello")
+
     while True:
         #  Input a chemical equation / expression.
         try:
-            expression = _utils_compatible.input_prompt(">> ").replace(" ", "")
+            if args.service_mode:
+                expression = _shell_service.read_message().strip()
+            else:
+                expression = _utils_compatible.input_prompt(">> ").replace(" ", "")
         except EOFError:
             break
 
         #  Ignore zero-length expressions and comment lines.
         if len(expression) == 0 or expression[0] == "#":
+            if args.service_mode:
+                _shell_service.send_message("Answer-Null")
             continue
 
         #  Balance chemical equation / expression and print it out.
@@ -333,16 +354,37 @@ def main():
                 printer=printer_id,
                 unknown_header=unknown_header
             )
-            print(result)
+            if args.service_mode:
+                _shell_service.send_message("Answer-OK")
+                _shell_service.send_message(result)
+            else:
+                print(result)
         except _public_exception.ParserErrorWrapper as err:
-            print(str(err))
+            if args.service_mode:
+                _shell_service.send_message("Answer-Error")
+                _shell_service.send_message(str(err))
+            else:
+                print(str(err))
         except _public_exception.LogicErrorWrapper as err:
-            print(str(err))
+            if args.service_mode:
+                _shell_service.send_message("Answer-Error")
+                _shell_service.send_message(str(err))
+            else:
+                print(str(err))
         except _public_exception.InvalidCharacterException:
-            print(_l10n_registry.get_message(
+            err_message = _l10n_registry.get_message(
                 l10n_option.get_language_id(),
                 "shell.console.error.invalid_character.description"
-            ))
+            )
+            if args.service_mode:
+                _shell_service.send_message("Answer-Error")
+                _shell_service.send_message(err_message)
+            else:
+                print(err_message)
+
+    #  Print good-bye message.
+    if args.service_mode:
+        _shell_service.send_message("Good-Bye")
 
     #  Print an empty line.
     print("")

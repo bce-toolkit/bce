@@ -38,6 +38,7 @@ def setup_localization():
                     "disable_bundled_abbreviations": "Disable bundled abbreviations.",
                     "disable_error_correction": "Disable the error-correction feature.",
                     "disable_auto_arranging": "Disable the auto-arranging feature.",
+                    "service_mode": "Start in service mode.",
                     "unknown_header": "Set the header of unknown symbols.",
                     "load_abbreviations_file": "Load extra abbreviations from specified file.",
                     "language": "Set the software language." +
@@ -78,6 +79,7 @@ def setup_localization():
                     "disable_bundled_abbreviations": "禁用自带的各种缩写符号。",
                     "disable_error_correction": "禁用自动纠错特性。",
                     "disable_auto_arranging": "禁用自动分界特性。",
+                    "service_mode": "从服务模式启动。",
                     "unknown_header": "设置系统未知量符号前缀。",
                     "load_abbreviations_file": "从指定文件中读取额外(非自带的)的缩写符号。",
                     "language": "设置软件语言。" +
