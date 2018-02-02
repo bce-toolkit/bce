@@ -13,7 +13,6 @@ import bce.public.exception as _public_exception
 import bce.public.option as _public_option
 import bce.public.printer as _public_printer
 import bce.shell.console.l10n as _shell_l10n
-import bce.shell.console.service as _shell_service
 import bce.utils.compatible as _utils_compatible
 import bce.utils.file_io as _utils_file_io
 import bce.utils.input_checker as _utils_input_chk
@@ -182,17 +181,6 @@ def main():
             "shell.console.command.show_version"
         )
     )
-    arg_parser.add_argument(
-        "--service-mode",
-        dest="service_mode",
-        action="store_const",
-        const=True,
-        default=False,
-        help=_l10n_registry.get_message(
-            l10n_option.get_language_id(),
-            "shell.console.command.service_mode"
-        )
-    )
     args = arg_parser.parse_args()
 
     #  Set the language.
@@ -323,34 +311,22 @@ def main():
     #  Set abbreviations in the option object.
     _public_option.MoleculeParserOptionWrapper(option).set_abbreviation_mapping(abbreviations)
 
-    #  Show the hello message (for only service mode).
-    if args.service_mode:
-        _shell_service.send_message("Hello")
-
     while True:
         #  Input a chemical equation / expression.
         try:
-            if args.service_mode:
-                expression = _shell_service.read_message().strip()
-            else:
-                expression = _utils_compatible.input_prompt(">> ").replace(" ", "")
+            expression = _utils_compatible.input_prompt(">> ").replace(" ", "")
         except EOFError:
             break
 
         #  Ignore zero-length expressions and comment lines.
         if len(expression) == 0 or expression[0] == "#":
-            if args.service_mode:
-                _shell_service.send_message("Answer-Null")
             continue
 
         #  Balance chemical equation / expression and print it out.
         try:
             printer_id = _public_printer.PRINTER_TEXT
-            if args.service_mode:
-                printer_id |= _public_printer.PRINTER_MATHML
-            else:
-                if args.output_mathml:
-                    printer_id = _public_printer.PRINTER_MATHML
+            if args.output_mathml:
+                printer_id = _public_printer.PRINTER_MATHML
             cb_ctx = {
                 "symbols": set()
             }
@@ -362,41 +338,18 @@ def main():
                 callback_after_balance=callback_after_balancing,
                 callback_context=cb_ctx
             )
-            if args.service_mode:
-                _shell_service.send_message("Answer-OK")
-                _shell_service.send_message(_json.dumps({
-                    "result": result,
-                    "symbols": list(cb_ctx["symbols"])
-                }))
-            else:
-                assert isinstance(result, str)
-                print(result)
+            assert isinstance(result, str)
+            print(result)
         except _public_exception.ParserErrorWrapper as err:
-            if args.service_mode:
-                _shell_service.send_message("Answer-Error")
-                _shell_service.send_message(str(err))
-            else:
-                print(str(err))
+            print(str(err))
         except _public_exception.LogicErrorWrapper as err:
-            if args.service_mode:
-                _shell_service.send_message("Answer-Error")
-                _shell_service.send_message(str(err))
-            else:
-                print(str(err))
+            print(str(err))
         except _public_exception.InvalidCharacterException:
             err_message = _l10n_registry.get_message(
                 l10n_option.get_language_id(),
                 "shell.console.error.invalid_character.description"
             )
-            if args.service_mode:
-                _shell_service.send_message("Answer-Error")
-                _shell_service.send_message(err_message)
-            else:
-                print(err_message)
-
-    #  Print good-bye message.
-    if args.service_mode:
-        _shell_service.send_message("Good-Bye")
+            print(err_message)
 
     #  Print an empty line.
     print("")
