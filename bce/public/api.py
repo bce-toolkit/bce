@@ -14,6 +14,7 @@ import bce.parser.interface.printer as _interface_printer
 import bce.public.exception as _pub_exception
 import bce.public.printer as _pub_printer
 import bce.utils.input_checker as _util_input_chk
+import types as _types
 
 
 def _print_cexp(
@@ -66,7 +67,10 @@ def balance_chemical_equation(
         expression,
         options,
         printer=_pub_printer.PRINTER_TEXT,
-        unknown_header="X"
+        unknown_header="X",
+        callback_before_balance=None,
+        callback_after_balance=None,
+        callback_context = None
 ):
     """Balance a chemical equation.
 
@@ -74,10 +78,15 @@ def balance_chemical_equation(
     :type options: bce.option.Option
     :type printer: int
     :type unknown_header: str
+    :type callback_before_balance: types.FunctionType | None
+    :type callback_after_balance: types.FunctionType | None
     :param expression: The chemical equation.
     :param options: The options.
     :param printer: The printer ID.
     :param unknown_header: The header of unknowns.
+    :param callback_before_balance: Callback that will be called before balancing.
+    :param callback_after_balance: Callback that will be called after balancing.
+    :param callback_context: The callback context.
     :rtype: str
     :return: The balanced chemical equation.
     """
@@ -101,12 +110,20 @@ def balance_chemical_equation(
             mexp_protected_header_prefix=unknown_header
         )
 
+        #  Run before balance callback.
+        if callback_before_balance is not None and isinstance(callback_before_balance, _types.FunctionType):
+            callback_before_balance(callback_context, cexp_object)
+
         #  Balance the chemical equation.
         _lgc_bce_main.balance_chemical_equation(
             cexp_object,
             options,
             unknown_header=unknown_header
         )
+
+        #  Run after balance callback.
+        if callback_after_balance is not None and isinstance(callback_after_balance, _types.FunctionType):
+            callback_after_balance(callback_context, cexp_object)
 
         #  Print.
         return _print_cexp(

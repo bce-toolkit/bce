@@ -348,15 +348,23 @@ def main():
             printer_id = _public_printer.PRINTER_TEXT
             if args.output_mathml:
                 printer_id = _public_printer.PRINTER_MATHML
+            cb_ctx = {
+                "symbols": set()
+            }
             result = _public_api.balance_chemical_equation(
                 expression,
                 option,
                 printer=printer_id,
-                unknown_header=unknown_header
+                unknown_header=unknown_header,
+                callback_after_balance=callback_after_balancing,
+                callback_context=cb_ctx
             )
             if args.service_mode:
                 _shell_service.send_message("Answer-OK")
-                _shell_service.send_message(result)
+                _shell_service.send_message(_json.dumps({
+                    "result": result,
+                    "symbols": list(cb_ctx["symbols"])
+                }))
             else:
                 print(result)
         except _public_exception.ParserErrorWrapper as err:
@@ -390,3 +398,15 @@ def main():
     print("")
 
     _sys.exit(0)
+
+
+def callback_after_balancing(ctx, cexp_object):
+    """Callback that will be called after balancing.
+
+    :type cexp_object: bce.parser.interface.cexp_parser.ChemicalEquation
+    :type ctx: dict
+    :param ctx: The callback context.
+    :param cexp_object: The chemical equation object.
+    """
+
+    ctx["symbols"] = cexp_object.collect_symbols()

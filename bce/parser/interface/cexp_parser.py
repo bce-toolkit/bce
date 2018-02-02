@@ -365,6 +365,26 @@ class ChemicalEquation:
             for item in all_items:
                 item.set_coefficient((item.get_coefficient() / numer_gcd).simplify())
 
+    def collect_symbols(self):
+        """Collect all symbols.
+
+        :rtype: set[str]
+        :return: A set that contains all symbols.
+        """
+
+        #  Create a new set.
+        symbols = set()
+
+        #  Get the list that contains all items.
+        all_items = self.__left_items + self.__right_items
+
+        #  Collect all symbols.
+        for item in all_items:
+            for symbol in item.get_coefficient().free_symbols:
+                symbols.add(symbol.name)
+
+        return symbols
+
     def flip(self):
         """Flip the left items and the right items."""
 
