@@ -70,7 +70,7 @@ def balance_chemical_equation(
         unknown_header="X",
         callback_before_balance=None,
         callback_after_balance=None,
-        callback_context = None
+        callback_context=None
 ):
     """Balance a chemical equation.
 
